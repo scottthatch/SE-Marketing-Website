@@ -14,6 +14,7 @@ se-marketing-website/
 |   `-- script.js
 |-- images/
 |   `-- qr-placeholder.svg
+|   `-- preview-qr.png
 |-- assets/
 |   `-- mockups/
 |       |-- desktop-mockup.svg
@@ -34,23 +35,28 @@ npx serve .
 
 Then open the local URL shown in your terminal.
 
-## Replacing the QR Placeholder
+## QR Code
 
-The QR code placeholder is intentionally easy to replace.
+The main page includes a real QR image at `images/preview-qr.png`.
+
+It points to:
+
+```text
+https://scottthatch.github.io/SE-Marketing-Website/preview.html
+```
+
+## Replacing the QR Code
 
 1. Generate a QR code that points to the live URL for `preview.html`, for example `https://your-domain.com/preview.html`.
 2. Save your real QR image in the `images` folder, for example `images/website-qr.png`.
 3. Open `index.html`.
-4. Find the QR section comment:
+4. Find the QR section image:
 
 ```html
-<!-- Generate your QR code to point to preview.html, then replace this placeholder with the image:
-     <img src="images/your-qr-code.png" alt="Scan to see what your website could look like">
--->
-<div class="qr-placeholder">QR CODE</div>
+<img src="images/preview-qr.png" alt="Scan to see what your website could look like">
 ```
 
-5. Replace the placeholder `<div>` with your image:
+5. Replace the `src` with your new image:
 
 ```html
 <img src="images/website-qr.png" alt="Scan to see what your website could look like">
