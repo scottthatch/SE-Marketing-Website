@@ -1,0 +1,21 @@
+{
+  "name": "se-marketing-website",
+  "version": "1.0.0",
+  "description": "A polished single-page marketing website for SE Marketing Consulting, aimed at local small business owners.",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8080",
+    "build": "echo 'No build process required for this project.'"
+  },
+  "keywords": [
+    "marketing",
+    "consulting",
+    "small business",
+    "website",
+    "responsive"
+  ],
+  "author": "Scott Thatcher",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {}
+}

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="375" height="667" viewBox="0 0 375 667">
+    <rect width="375" height="667" rx="30" fill="#ffffff" stroke="#d1d1d1" stroke-width="2"/>
+    <rect x="15" y="15" width="345" height="637" rx="20" fill="#f9f9f9"/>
+    <text x="50%" y="30%" dominant-baseline="middle" text-anchor="middle" font-size="24" fill="#333333">Your Business Name</text>
+    <text x="50%" y="40%" dominant-baseline="middle" text-anchor="middle" font-size="16" fill="#666666">Your tagline goes here</text>
+    <rect x="30" y="100" width="315" height="400" fill="#e0e0e0" rx="10"/>
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="18" fill="#999999">Imagine your website here</text>
+    <rect x="30" y="520" width="315" height="40" fill="#007bff" rx="5"/>
+    <text x="50%" y="540" dominant-baseline="middle" text-anchor="middle" font-size="16" fill="#ffffff">Visit YourWebsite.com</text>
+</svg>
