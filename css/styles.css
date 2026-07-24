@@ -18,14 +18,17 @@
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 body {
+    width: 100%;
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
     color: var(--ink);
     background: #f8fbff;
     line-height: 1.6;
+    overflow-x: hidden;
 }
 
 body::before {
@@ -48,11 +51,37 @@ a {
     text-decoration: none;
 }
 
+.skip-link {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 100;
+    padding: 10px 14px;
+    color: var(--white);
+    background: var(--navy);
+    transform: translateY(-150%);
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+}
+
 h1,
 h2,
 h3,
 p {
     margin: 0;
+    overflow-wrap: break-word;
+}
+
+main,
+section,
+article,
+aside,
+div,
+form,
+nav {
+    min-width: 0;
 }
 
 h1 {
@@ -185,6 +214,8 @@ h3 {
     border-radius: 8px;
     padding: 14px 22px;
     font-weight: 800;
+    text-align: center;
+    white-space: normal;
     transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
 }
 
@@ -221,6 +252,35 @@ h3 {
     background: rgba(255, 255, 255, 0.14);
     box-shadow: 0 30px 90px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(14px);
+}
+
+.hero-card h2 {
+    font-size: clamp(1.7rem, 3vw, 2.4rem);
+}
+
+.check-list {
+    display: grid;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.check-list li {
+    position: relative;
+    padding-left: 28px;
+}
+
+.check-list li::before {
+    position: absolute;
+    left: 0;
+    content: "✓";
+    color: var(--gold);
+    font-weight: 900;
+}
+
+.hero-card .check-list li::before {
+    color: var(--gold-light);
 }
 
 .mini-browser,
@@ -482,6 +542,12 @@ h3 {
     grid-column: span 3;
 }
 
+.service-grid-wide .service-card,
+.service-grid-wide .service-card:nth-child(4),
+.service-grid-wide .service-card:nth-child(5) {
+    grid-column: span 3;
+}
+
 .service-card p {
     color: var(--muted);
 }
@@ -512,6 +578,222 @@ h3 {
     padding: clamp(26px, 5vw, 46px);
     background: rgba(255, 255, 255, 0.1);
     box-shadow: 0 26px 60px rgba(0, 0, 0, 0.16);
+}
+
+.offer-card > div {
+    max-width: 760px;
+}
+
+.plan-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+}
+
+.plan-card {
+    display: grid;
+    align-content: start;
+    gap: 22px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: clamp(24px, 4vw, 38px);
+    background: var(--white);
+    box-shadow: var(--soft-shadow);
+}
+
+.plan-card h3 {
+    font-size: clamp(1.45rem, 3vw, 2rem);
+}
+
+.plan-card-featured {
+    border: 2px solid var(--blue);
+    background: var(--sky);
+}
+
+.card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+}
+
+.pricing-hero {
+    color: var(--white);
+    background:
+        linear-gradient(120deg, rgba(18, 52, 90, 0.97), rgba(30, 106, 168, 0.9)),
+        radial-gradient(circle at 85% 25%, rgba(255, 228, 163, 0.65), transparent 28%);
+}
+
+.pricing-hero .section-heading {
+    max-width: 900px;
+    margin-bottom: 0;
+}
+
+.pricing-hero .section-heading p:not(.eyebrow) {
+    max-width: 760px;
+    color: rgba(255, 255, 255, 0.84);
+}
+
+.pricing-section {
+    background: #f4f8fd;
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    align-items: start;
+}
+
+.pricing-grid .plan-card {
+    height: 100%;
+}
+
+.plan-note {
+    border-top: 1px solid var(--line);
+    padding-top: 16px;
+    color: var(--muted);
+    font-size: 0.92rem;
+}
+
+.text-link,
+.form-note a,
+.contact-details a,
+.legal-copy a {
+    color: var(--blue);
+    font-weight: 800;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.contact-section {
+    background: var(--white);
+}
+
+.contact-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(260px, 0.7fr);
+    gap: 28px;
+    align-items: start;
+}
+
+.contact-form,
+.contact-details {
+    display: grid;
+    gap: 18px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: clamp(22px, 4vw, 34px);
+    background: #f8fbff;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.contact-form label {
+    display: grid;
+    gap: 7px;
+    color: var(--navy);
+    font-weight: 800;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    border: 1px solid #a9b8ca;
+    border-radius: 6px;
+    padding: 12px;
+    color: var(--ink);
+    background: var(--white);
+    font: inherit;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: var(--blue);
+    outline: 3px solid rgba(30, 106, 168, 0.18);
+}
+
+.contact-form button {
+    border: 0;
+    cursor: pointer;
+}
+
+.contact-form button:disabled {
+    cursor: wait;
+    opacity: 0.72;
+}
+
+.honeypot {
+    position: absolute !important;
+    left: -10000px !important;
+}
+
+.form-status {
+    min-height: 1.5em;
+    font-weight: 800;
+}
+
+.form-status[data-state="success"] {
+    color: #17643d;
+}
+
+.form-status[data-state="error"] {
+    color: #a32323;
+}
+
+.form-note,
+.contact-details p,
+.legal-name {
+    color: var(--muted);
+}
+
+.site-footer {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 18px 30px;
+    color: rgba(255, 255, 255, 0.82);
+    background: #0f2744;
+}
+
+.site-footer strong {
+    color: var(--gold-light);
+    font-size: 1.15rem;
+}
+
+.site-footer nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.site-footer nav a:hover,
+.site-footer nav a:focus-visible {
+    color: var(--gold-light);
+}
+
+.legal-page {
+    min-height: 65vh;
+    background: var(--white);
+}
+
+.legal-copy {
+    width: 100%;
+    display: grid;
+    max-width: 820px;
+    gap: 18px;
+}
+
+.legal-copy h2 {
+    margin-top: 18px;
+    font-size: 1.5rem;
+}
+
+.legal-copy ul {
+    margin: 0;
 }
 
 .offer-card p:not(.eyebrow) {
@@ -944,10 +1226,16 @@ address a:focus-visible {
 @media (max-width: 900px) {
     .site-header {
         position: static;
+        align-items: flex-start;
+        flex-wrap: wrap;
     }
 
     .nav-links {
-        display: none;
+        width: 100%;
+        overflow-x: auto;
+        justify-content: flex-start;
+        border-top: 1px solid var(--line);
+        padding-top: 10px;
     }
 
     .hero,
@@ -956,7 +1244,10 @@ address a:focus-visible {
     .qr-content,
     .contact-card,
     .sample-desktop-hero,
-    .preview-cta-card {
+    .preview-cta-card,
+    .plan-grid,
+    .contact-layout,
+    .pricing-grid {
         grid-template-columns: 1fr;
     }
 
@@ -1021,9 +1312,24 @@ address a:focus-visible {
         font-size: 0.94rem;
     }
 
+    .nav-links {
+        gap: 2px;
+        font-size: 0.84rem;
+    }
+
+    .nav-links a {
+        padding: 8px 9px;
+        white-space: nowrap;
+    }
+
     .hero-actions {
         align-items: stretch;
         flex-direction: column;
+    }
+
+    .form-grid,
+    .site-footer {
+        grid-template-columns: 1fr;
     }
 
     .button {

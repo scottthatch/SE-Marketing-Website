@@ -1,81 +1,47 @@
-# SE Marketing Consulting Website
+# True Partner Tech Website
 
-A polished single-page marketing website for SE Marketing Consulting. The page is designed as a live advertisement for local small business owners who need a clean, modern, affordable website.
+The static marketing website for **True Partner Tech**, a public brand of **SE Marketing Consulting LLC**. The canonical production URL is `https://truepartnertech.com`.
 
-## Project Structure
+## Architecture
 
-```text
-se-marketing-website/
-|-- index.html
-|-- preview.html
-|-- css/
-|   `-- styles.css
-|-- js/
-|   `-- script.js
-|-- images/
-|   `-- qr-placeholder.svg
-|   `-- preview-qr.png
-|-- assets/
-|   `-- mockups/
-|       |-- desktop-mockup.svg
-|       `-- phone-mockup.svg
-|-- package.json
-`-- README.md
-```
+- Static HTML routes: `/`, `/pricing.html`, `/preview.html`, `/privacy.html`, `/terms.html`
+- Shared CSS and dependency-free browser JavaScript
+- Cloudflare Pages Function at `/api/contact`
+- Node's built-in test runner and repository validation scripts
 
-## Run Locally
+## Local development
 
-This is a static HTML/CSS/JavaScript site. You can open `index.html` directly in a browser.
-
-If you prefer a local server, run:
+Requires Python for the convenience server and Node.js 20 or newer for checks.
 
 ```bash
-npx serve .
+npm start
+npm run check
 ```
 
-Then open the local URL shown in your terminal.
+Static pages work locally. The contact form requires the Cloudflare Pages runtime and configured email variables; use a Cloudflare preview to test delivery.
 
-## QR Code
+## Contact-form configuration
 
-The main page includes a real QR image at `images/preview-qr.png`.
+The form delivers through Resend and requires:
 
-It points to:
+- `RESEND_API_KEY` (secret)
+- `CONTACT_TO_EMAIL` (normally `hello@truepartnertech.com`)
+- `CONTACT_FROM_EMAIL` (a sender on a verified domain)
 
-```text
-https://scottthatch.github.io/SE-Marketing-Website/preview.html
+See [`docs/cloudflare-deployment.md`](docs/cloudflare-deployment.md) for Cloudflare setup, the apex-domain preference, `www` redirect guidance, old-domain redirects, and email prerequisites.
+
+## Quality checks
+
+```bash
+npm run format:check
+npm run lint
+npm test
+npm run check:links
+npm run build
 ```
 
-## Replacing the QR Code
+The checks validate public branding and canonicals, contact-form success/failure behavior, local links and assets, JSON/XML syntax, and the static production file set.
 
-1. Generate a QR code that points to the live URL for `preview.html`, for example `https://your-domain.com/preview.html`.
-2. Save your real QR image in the `images` folder, for example `images/website-qr.png`.
-3. Open `index.html`.
-4. Find the QR section image:
+## Deployment safety
 
-```html
-<img src="images/preview-qr.png" alt="Scan to see what your website could look like">
-```
-
-5. Replace the `src` with your new image:
-
-```html
-<img src="images/website-qr.png" alt="Scan to see what your website could look like">
-```
-
-The CSS already includes styling for `.qr-frame img`, so the real QR code will fit in the existing box without additional changes.
-
-## Included Sections
-
-- Hero section with primary call to action
-- "This Could Be Your Website" desktop and phone mock website preview
-- Services cards
-- 20% off offer block
-- QR code placeholder section linking to `preview.html`
-- Quick preview scan landing page
-- Contact section for SE Marketing Consulting and Scott Thatcher
-
-## Customization Notes
-
-- Update colors in `css/styles.css` under the `:root` variables.
-- Edit page copy and contact details in `index.html`.
-- Scroll animations are handled in `js/script.js` using `IntersectionObserver`.
+Do not commit, push, merge, deploy, change DNS, or remove old hosting until the corresponding review and approval step is complete.
