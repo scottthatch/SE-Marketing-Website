@@ -9,6 +9,7 @@ const publicFiles = [
     "pricing.html",
     "privacy.html",
     "terms.html",
+    "404.html",
     "_headers",
     "robots.txt",
     "sitemap.xml",

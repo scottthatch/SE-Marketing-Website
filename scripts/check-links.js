@@ -2,7 +2,7 @@ import { access, readFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 
 const outputRoot = resolve("dist");
-const pages = ["index.html", "pricing.html", "preview.html", "privacy.html", "terms.html"];
+const pages = ["index.html", "pricing.html", "preview.html", "privacy.html", "terms.html", "404.html"];
 const failures = [];
 
 for (const page of pages) {

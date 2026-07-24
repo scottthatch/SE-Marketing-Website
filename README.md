@@ -5,6 +5,7 @@ The static marketing website for **True Partner Tech**, the public-facing brand 
 ## Architecture
 
 - Static HTML routes: `/`, `/pricing.html`, `/preview.html`, `/privacy.html`, `/terms.html`
+- Custom static error page: `/404.html` (excluded from the sitemap)
 - Shared CSS and dependency-free browser JavaScript
 - Cloudflare Pages Function at `/api/contact`
 - Allowlisted static production output in `dist/`

@@ -802,6 +802,39 @@ h3 {
     margin: 0;
 }
 
+.not-found-page {
+    min-height: 68vh;
+    display: grid;
+    place-items: center;
+    color: var(--white);
+    background:
+        linear-gradient(120deg, rgba(18, 52, 90, 0.97), rgba(30, 106, 168, 0.9)),
+        radial-gradient(circle at 85% 25%, rgba(255, 228, 163, 0.65), transparent 28%);
+}
+
+.not-found-card {
+    display: grid;
+    max-width: 760px;
+    justify-items: start;
+    gap: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 8px;
+    padding: clamp(28px, 6vw, 54px);
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(14px);
+}
+
+.not-found-card h1 {
+    font-size: clamp(2.5rem, 7vw, 5rem);
+}
+
+.not-found-card > p:not(.eyebrow) {
+    max-width: 640px;
+    color: rgba(255, 255, 255, 0.84);
+    font-size: 1.08rem;
+}
+
 .offer-card p:not(.eyebrow) {
     color: rgba(255, 255, 255, 0.82);
     font-size: 1.2rem;
@@ -1344,6 +1377,10 @@ address a:focus-visible {
 
     .button {
         width: 100%;
+    }
+
+    .not-found-card {
+        justify-items: stretch;
     }
 
     .metric-grid,
