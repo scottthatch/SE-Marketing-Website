@@ -646,7 +646,13 @@ h3 {
 }
 
 .pricing-grid .plan-card {
+    display: flex;
+    flex-direction: column;
     height: 100%;
+}
+
+.pricing-grid .plan-card > .button {
+    margin-top: auto;
 }
 
 .plan-note {
@@ -1249,6 +1255,10 @@ address a:focus-visible {
     .contact-layout,
     .pricing-grid {
         grid-template-columns: 1fr;
+    }
+
+    .pricing-grid .plan-card {
+        height: auto;
     }
 
     .hero,

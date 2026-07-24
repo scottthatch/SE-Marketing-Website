@@ -3,16 +3,16 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "The static marketing website for True Partner Tech, a public brand of SE Marketing Consulting LLC.",
+  "description": "The static marketing website for True Partner Tech, the public-facing brand of SE Marketing Consulting LLC.",
   "scripts": {
     "start": "python -m http.server 8080",
     "format:check": "node scripts/format-check.js",
     "lint": "node --check js/script.js && node --check functions/api/contact.js",
-    "test": "node --test",
+    "test": "npm run build && node --test",
     "test:brand": "node --test tests/brand.test.js",
     "check:links": "node scripts/check-links.js",
     "build": "node scripts/build.js",
-    "check": "npm run format:check && npm run lint && npm test && npm run check:links && npm run build"
+    "check": "npm run format:check && npm run lint && npm test && npm run check:links"
   },
   "keywords": ["small business", "websites", "automation", "AI", "technology consulting"],
   "author": "Scott Thatcher",

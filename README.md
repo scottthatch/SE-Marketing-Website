@@ -1,12 +1,13 @@
 # True Partner Tech Website
 
-The static marketing website for **True Partner Tech**, a public brand of **SE Marketing Consulting LLC**. The canonical production URL is `https://truepartnertech.com`.
+The static marketing website for **True Partner Tech**, the public-facing brand of **SE Marketing Consulting LLC**. The canonical production URL is `https://truepartnertech.com`.
 
 ## Architecture
 
 - Static HTML routes: `/`, `/pricing.html`, `/preview.html`, `/privacy.html`, `/terms.html`
 - Shared CSS and dependency-free browser JavaScript
 - Cloudflare Pages Function at `/api/contact`
+- Allowlisted static production output in `dist/`
 - Node's built-in test runner and repository validation scripts
 
 ## Local development
@@ -19,6 +20,24 @@ npm run check
 ```
 
 Static pages work locally. The contact form requires the Cloudflare Pages runtime and configured email variables; use a Cloudflare preview to test delivery.
+
+## Production build
+
+```bash
+npm run build
+```
+
+The build deletes and recreates `dist/`, then copies only deployable HTML, CSS, JavaScript, images, assets, and Pages metadata. Generated `dist/` files are ignored by Git. Internal documentation, tests, scripts, package metadata, the root `functions/` directory, and secrets are not copied.
+
+Cloudflare Pages should use:
+
+- Framework preset: None
+- Root directory: leave blank
+- Build command: `npm run build`
+- Build output directory: `dist`
+- Production branch: `main`
+
+The Pages Function remains at `functions/api/contact.js` in the repository root. Cloudflare discovers that directory separately from the static `dist` output.
 
 ## Contact-form configuration
 
@@ -40,7 +59,7 @@ npm run check:links
 npm run build
 ```
 
-The checks validate public branding and canonicals, contact-form success/failure behavior, local links and assets, JSON/XML syntax, and the static production file set.
+The checks validate public branding and canonicals, contact-form success/failure behavior, built links and assets, JSON/XML syntax, and the allowlisted production output.
 
 ## Deployment safety
 

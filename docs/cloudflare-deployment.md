@@ -6,8 +6,13 @@ This repository is prepared for a Cloudflare Pages static deployment with one Pa
 
 - Production branch: `main` (do not change until the rebrand branch is reviewed and merged)
 - Build command: `npm run build`
-- Build output directory: `.`
-- Root directory: repository root
+- Build output directory: `dist`
+- Root directory: leave blank (repository root)
+- Framework preset: None
+
+The build recreates `dist` from an explicit public-file allowlist. Internal documentation, tests, scripts, package metadata, source-control files, secrets, and `functions/` are not copied into the static output.
+
+`functions/api/contact.js` remains under the repository-root `functions/` directory. Cloudflare Pages discovers and deploys that Function separately from the static `dist` directory, exposing it at `/api/contact`.
 
 Do not put secret values in this repository. Configure these under **Workers & Pages → project → Settings → Variables and Secrets**:
 

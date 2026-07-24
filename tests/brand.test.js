@@ -58,6 +58,34 @@ test("plans contain no unapproved dollar pricing or unsupported AI claims", asyn
     assert.match(pricing, /custom implementation/i);
 });
 
+test("legal disclosures use public-facing brand language without implying a DBA", async () => {
+    const privacy = await readFile("privacy.html", "utf8");
+    const terms = await readFile("terms.html", "utf8");
+    const homepage = await readFile("index.html", "utf8");
+    const combined = `${privacy}\n${terms}\n${homepage}`;
+
+    assert.match(privacy, /operating under the public-facing brand True Partner Tech/);
+    assert.match(terms, /under the public-facing brand True Partner Tech/);
+    assert.match(homepage, /public-facing brand of SE Marketing Consulting LLC/);
+    assert.doesNotMatch(combined, /doing business|doing business publicly|public brand of/i);
+});
+
+test("terms preserve customer and third-party intellectual property exclusions", async () => {
+    const terms = await readFile("terms.html", "utf8");
+    for (const phrase of [
+        "third-party software",
+        "open-source components",
+        "fonts",
+        "stock images or licensed media",
+        "plugins or integrations",
+        "domain registrations",
+        "third-party subscriptions",
+        "customer-provided text, logos, photographs, trademarks"
+    ]) {
+        assert.match(terms, new RegExp(phrase.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i"));
+    }
+});
+
 test("client code only shows success after an affirmative server response", async () => {
     const script = await readFile("js/script.js", "utf8");
     assert.match(script, /!response\.ok \|\| result\.success !== true/);
