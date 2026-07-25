@@ -626,6 +626,10 @@ h3 {
     font-size: clamp(1.45rem, 3vw, 2rem);
 }
 
+.plan-card .eyebrow {
+    color: var(--navy);
+}
+
 .plan-card-featured {
     border: 2px solid var(--blue);
     background: var(--sky);
