@@ -16,8 +16,7 @@ const requiredOutput = [
     "assets",
     "_headers",
     "robots.txt",
-    "sitemap.xml",
-    "site.webmanifest"
+    "sitemap.xml"
 ];
 const forbiddenOutput = [
     "README.md",
@@ -29,7 +28,8 @@ const forbiddenOutput = [
     "node_modules",
     ".git",
     "functions",
-    ".env"
+    ".env",
+    "site.webmanifest"
 ];
 
 test("dist contains every required public route and asset group", async () => {
@@ -45,6 +45,23 @@ test("dist excludes internal, generated, secret, and Function source files", asy
         assert.ok(!entries.includes(path), `dist should not contain ${path}`);
     }
     await access(resolve("functions/api/contact.js"));
+});
+
+test("production pages keep favicons without installable-site metadata", async () => {
+    const publicPages = requiredOutput.filter((path) => path.endsWith(".html"));
+    const pages = await Promise.all(publicPages.map((path) => readFile(resolve(path), "utf8")));
+    const browserCode = `${pages.join("\n")}\n${await readFile(resolve("js/script.js"), "utf8")}`;
+
+    for (const [index, page] of pages.entries()) {
+        assert.doesNotMatch(page, /<link[^>]+rel=["']manifest["']/i, `${publicPages[index]} should not link to a web manifest`);
+        assert.match(page, /<link[^>]+rel=["']icon["'][^>]+href=["']\/assets\/favicon\.svg["']/i, `${publicPages[index]} should retain its favicon`);
+    }
+
+    await access(resolve("assets/favicon.svg"));
+    await access(resolve("dist/assets/favicon.svg"));
+    await assert.rejects(access(resolve("site.webmanifest")));
+    await assert.rejects(access(resolve("dist/site.webmanifest")));
+    assert.doesNotMatch(browserCode, /serviceWorker|beforeinstallprompt|appinstalled/i);
 });
 
 test("404 page is private from search and has valid public navigation", async () => {

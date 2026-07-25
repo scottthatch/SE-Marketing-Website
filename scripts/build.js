@@ -12,8 +12,7 @@ const publicFiles = [
     "404.html",
     "_headers",
     "robots.txt",
-    "sitemap.xml",
-    "site.webmanifest"
+    "sitemap.xml"
 ];
 const publicDirectories = ["css", "js", "images", "assets"];
 const requiredProjectFiles = [...publicFiles, ...publicDirectories, "functions/api/contact.js"];
@@ -64,8 +63,6 @@ for (const file of publicFiles) {
 for (const directory of publicDirectories) {
     await copyDirectory(resolve(projectRoot, directory), resolve(outputDirectory, directory));
 }
-
-JSON.parse(await readFile(resolve(outputDirectory, "site.webmanifest"), "utf8"));
 
 const sitemap = await readFile(resolve(outputDirectory, "sitemap.xml"), "utf8");
 if (
