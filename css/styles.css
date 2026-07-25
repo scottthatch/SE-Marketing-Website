@@ -197,18 +197,21 @@ h3 {
 }
 
 .eyebrow {
-    color: var(--gold-light);
+    color: var(--navy);
     font-size: 0.78rem;
     font-weight: 800;
     letter-spacing: 0.12em;
     text-transform: uppercase;
 }
 
-.section-heading .eyebrow,
-.services .eyebrow,
-.qr-section .eyebrow,
-.contact .eyebrow {
-    color: var(--gold);
+.hero .eyebrow,
+.pricing-hero .eyebrow,
+.offer .eyebrow,
+.contact .eyebrow,
+.not-found-page .eyebrow,
+.preview-hero .eyebrow,
+.preview-cta .eyebrow {
+    color: var(--white);
 }
 
 .hero-copy {
@@ -453,7 +456,7 @@ h3 {
 }
 
 .mock-hero p {
-    color: var(--gold-light);
+    color: var(--white);
     font-size: 0.82rem;
     font-weight: 900;
     text-transform: uppercase;
@@ -1142,7 +1145,7 @@ address a:focus-visible {
 }
 
 .sample-desktop-hero p {
-    color: var(--gold-light);
+    color: var(--white);
     font-size: 0.78rem;
     font-weight: 900;
     letter-spacing: 0.12em;
@@ -1177,7 +1180,7 @@ address a:focus-visible {
 }
 
 .sample-desktop-hero aside strong {
-    color: var(--gold-light);
+    color: var(--white);
     font-size: 1.28rem;
 }
 
