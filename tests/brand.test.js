@@ -3,6 +3,20 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 
 const publicFiles = ["index.html", "pricing.html", "preview.html", "privacy.html", "terms.html"];
+const headerFiles = [...publicFiles, "404.html"];
+
+test("public headers use the connection mark without a lettermark", async () => {
+    for (const file of headerFiles) {
+        const page = await readFile(file, "utf8");
+        assert.match(page, /class="brand-mark"[^>]*>.*class="brand-symbol"/, `${file} should use the brand symbol`);
+        assert.match(page, /<span>True Partner Tech<\/span>/, `${file} should preserve the full header name`);
+        assert.doesNotMatch(page, /class="brand-mark"[^>]*>\s*TP\s*</, `${file} should not use the TP lettermark`);
+    }
+
+    const favicon = await readFile("assets/favicon.svg", "utf8");
+    assert.match(favicon, /<path /);
+    assert.doesNotMatch(favicon, /<text|>TP</);
+});
 
 test("public pages use the new brand, domain, and email", async () => {
     const pages = await Promise.all(publicFiles.map((file) => readFile(file, "utf8")));
