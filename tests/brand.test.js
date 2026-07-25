@@ -3,6 +3,44 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 
 const publicFiles = ["index.html", "pricing.html", "preview.html", "privacy.html", "terms.html"];
+const headerFiles = [...publicFiles, "404.html"];
+
+function relativeLuminance(hex) {
+    const channels = hex.match(/[a-f\d]{2}/gi).map((channel) => Number.parseInt(channel, 16) / 255);
+    const linear = channels.map((channel) => channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4);
+    return (0.2126 * linear[0]) + (0.7152 * linear[1]) + (0.0722 * linear[2]);
+}
+
+function contrastRatio(foreground, background) {
+    const foregroundLuminance = relativeLuminance(foreground);
+    const backgroundLuminance = relativeLuminance(background);
+    const lighter = Math.max(foregroundLuminance, backgroundLuminance);
+    const darker = Math.min(foregroundLuminance, backgroundLuminance);
+    return (lighter + 0.05) / (darker + 0.05);
+}
+
+test("eyebrow text uses AA colors on light and dark sections", async () => {
+    const styles = await readFile("css/styles.css", "utf8");
+    assert.match(styles, /\.eyebrow\s*{\s*color: var\(--navy\);/);
+    assert.match(styles, /\.hero \.eyebrow,[\s\S]*\.preview-cta \.eyebrow\s*{\s*color: var\(--white\);/);
+    assert.ok(contrastRatio("#12345a", "#e9f4ff") >= 4.5);
+    assert.ok(contrastRatio("#12345a", "#ffffff") >= 4.5);
+    assert.ok(contrastRatio("#ffffff", "#1e6aa8") >= 4.5);
+    assert.ok(contrastRatio("#ffe4a3", "#0f2744") >= 4.5);
+});
+
+test("public headers use the connection mark without a lettermark", async () => {
+    for (const file of headerFiles) {
+        const page = await readFile(file, "utf8");
+        assert.match(page, /class="brand-mark"[^>]*>.*class="brand-symbol"/, `${file} should use the brand symbol`);
+        assert.match(page, /<span>True Partner Tech<\/span>/, `${file} should preserve the full header name`);
+        assert.doesNotMatch(page, /class="brand-mark"[^>]*>\s*TP\s*</, `${file} should not use the TP lettermark`);
+    }
+
+    const favicon = await readFile("assets/favicon.svg", "utf8");
+    assert.match(favicon, /<path /);
+    assert.doesNotMatch(favicon, /<text|>TP</);
+});
 
 test("public pages use the new brand, domain, and email", async () => {
     const pages = await Promise.all(publicFiles.map((file) => readFile(file, "utf8")));

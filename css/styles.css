@@ -132,11 +132,29 @@ h3 {
     display: grid;
     width: 40px;
     height: 40px;
+    flex: 0 0 40px;
     place-items: center;
     border-radius: 8px;
-    color: var(--white);
     background: linear-gradient(135deg, var(--blue), var(--navy));
     box-shadow: 0 10px 24px rgba(30, 106, 168, 0.26);
+}
+
+.brand-symbol {
+    width: 28px;
+    height: 28px;
+    overflow: visible;
+}
+
+.brand-symbol path {
+    fill: none;
+    stroke: var(--white);
+    stroke-width: 4.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.brand-symbol path:last-child {
+    stroke: var(--gold);
 }
 
 .nav-links {
@@ -179,18 +197,21 @@ h3 {
 }
 
 .eyebrow {
-    color: var(--gold-light);
+    color: var(--navy);
     font-size: 0.78rem;
     font-weight: 800;
     letter-spacing: 0.12em;
     text-transform: uppercase;
 }
 
-.section-heading .eyebrow,
-.services .eyebrow,
-.qr-section .eyebrow,
-.contact .eyebrow {
-    color: var(--gold);
+.hero .eyebrow,
+.pricing-hero .eyebrow,
+.offer .eyebrow,
+.contact .eyebrow,
+.not-found-page .eyebrow,
+.preview-hero .eyebrow,
+.preview-cta .eyebrow {
+    color: var(--white);
 }
 
 .hero-copy {
@@ -435,7 +456,7 @@ h3 {
 }
 
 .mock-hero p {
-    color: var(--gold-light);
+    color: var(--white);
     font-size: 0.82rem;
     font-weight: 900;
     text-transform: uppercase;
@@ -1124,7 +1145,7 @@ address a:focus-visible {
 }
 
 .sample-desktop-hero p {
-    color: var(--gold-light);
+    color: var(--white);
     font-size: 0.78rem;
     font-weight: 900;
     letter-spacing: 0.12em;
@@ -1159,7 +1180,7 @@ address a:focus-visible {
 }
 
 .sample-desktop-hero aside strong {
-    color: var(--gold-light);
+    color: var(--white);
     font-size: 1.28rem;
 }
 

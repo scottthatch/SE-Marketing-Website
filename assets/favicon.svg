@@ -6,5 +6,6 @@
     </linearGradient>
   </defs>
   <rect width="64" height="64" rx="12" fill="url(#brand-gradient)"/>
-  <text x="32" y="40" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" text-anchor="middle">TP</text>
+  <path d="M13 17L29 32H49" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M13 47L29 32H49M41 24L49 32L41 40" fill="none" stroke="#dca640" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
